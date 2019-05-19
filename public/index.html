@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo Book</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/styles/index.css">
+</head>
+<body>
+    <div class="container-fluid" id="app">
+        <div id="logo-container">Photo Book</div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3 uploadPane">
+                <form id="uploadForm">
+                  <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="image" class="form-control" type="file" name='image' placeholder="Upload a picture"/>          
+                  </div>
+                  <div class="form-group">
+                    <button id="uploadButton" type="button" class="btn btn-def btn-block photobutton">Upload a Picture</button>
+                  </div>
+                </form>    
+              </div>
+              <div class="col-sm-3 col-md-6">
+                  <h1>Picture Chat Room</h1>
+                  <div id="pictureDisplay"></div>
+              </div>
+              <div id="threadPane" class="col-sm-3 col-md-3">
+                <h1>Thread section</h1>
+                <form id="commentForm">
+                    <div class="form-group input-group">
+                      <textarea id="commentText" style="height: 100px;width: 150px;" class="form-control" name='text' placeholder="Type a comment"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <button id="commentButton" type="button" class="btn btn-def btn-block photobutton">Add Comment</button>
+                    </div>
+                  </form>
+                <div id="threadDisplay"></div>
+              </div>
+          </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/chat.js"></script>
+    <script>
+        let userToken = localStorage.getItem('userToken');
+        if (!userToken) window.location.replace('/login.html');
+      </script>
+</body>
+</html>

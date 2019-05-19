@@ -1,0 +1,51 @@
+{
+  "name": "sellingpoint-auth-api",
+  "version": "1.0.0",
+  "description": "A property management project.",
+  "repository": "https://gitlab.com/fishioscopers/sellingpoint-auth-api.git",
+  "author": "Fishioscopers Team",
+  "license": "MIT",
+  "engines": {
+    "node": "8.11.2",
+    "npm": "6.3.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "build": "babel lib -d dist",
+    "serve": "node dist/index.js",
+    "test": "nodemon --exec \"mocha --recursive './{,!(node_modules)/**/}*.test.js'\" || true",
+    "audit-deps": "rm package-lock.json; synp --source-file yarn.lock; npm audit; rm -f package-lock.json"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.1",
+    "bluebird": "^3.5.0",
+    "body-parser": "1.18.3",
+    "chai-http": "^4.2.1",
+    "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
+    "debug": "^2.6.1",
+    "express": "4.16.3",
+    "jsonwebtoken": "8.3.0",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.11.1",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "rotating-file-stream": "^1.1.9",
+    "sinon": "^7.0.0",
+    "socket.io": "^2.2.0",
+    "validator": "^7.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-register": "^6.23.0",
+    "chai": "^4.2.0",
+    "flow-bin": "^0.39.0",
+    "mocha": "^5.2.0",
+    "node-mocks-http": "^1.7.3",
+    "nodemon": "^1.11.0",
+    "synp": "^1.3.1"
+  }
+}
