@@ -11,8 +11,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "babel lib -d dist",
-    "serve": "node dist/index.js",
     "test": "nodemon --exec \"mocha --recursive './{,!(node_modules)/**/}*.test.js'\" || true",
     "audit-deps": "rm package-lock.json; synp --source-file yarn.lock; npm audit; rm -f package-lock.json"
   },
