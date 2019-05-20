@@ -30,22 +30,13 @@ describe('User service', function () {
         .set('Accept', 'application/json')
         .send({})
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(400);
-          expect(res.body).to.have.property('name');
-          expect(res.body.name).to.equal('ValidationError');
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.include('user validation failed');
-          expect(res.body).to.have.property('errors');
-          expect(res.body.errors).to.be.an('object');
-          expect(res.body.errors).to.have.all.keys('email', 'password');
-          expect(res.body.errors.email).to.be.an('object');
-          expect(res.body.errors.email).to.have.all.keys(
-            'message', 'name', 'properties', 'kind', 'path', '$isValidatorError'
-          );
-          expect(res.body.errors.password).to.be.an('object');
-          expect(res.body.errors.password).to.have.all.keys(
-            'message', 'name', 'properties', 'kind', 'path', '$isValidatorError'
-          );
+          expect(res.body.message).to.equal('Some required fields are missing');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data).to.include.members([ 'firstName', 'lastName', 'email', 'password' ]);
           done();
         });
     });
@@ -56,18 +47,13 @@ describe('User service', function () {
         .set('Accept', 'application/json')
         .send(_.omit(userObj, 'firstName'))
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(400);
-          expect(res.body).to.have.property('name');
-          expect(res.body.name).to.equal('ValidationError');
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.include('user validation failed');
-          expect(res.body).to.have.property('errors');
-          expect(res.body.errors).to.be.an('object');
-          expect(res.body.errors).to.have.all.keys('firstName');
-          expect(res.body.errors.email).to.be.an('object');
-          expect(res.body.errors.email).to.include.keys(
-            'message', 'name', 'properties', 'kind', 'path', '$isValidatorError'
-          );
+          expect(res.body.message).to.equal('Some required fields are missing');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data).to.include.members([ 'firstName' ]);
           done();
         });
     });
@@ -78,18 +64,13 @@ describe('User service', function () {
         .set('Accept', 'application/json')
         .send(_.omit(userObj, 'lastName'))
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(400);
-          expect(res.body).to.have.property('name');
-          expect(res.body.name).to.equal('ValidationError');
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.include('user validation failed');
-          expect(res.body).to.have.property('errors');
-          expect(res.body.errors).to.be.an('object');
-          expect(res.body.errors).to.have.all.keys('lastName');
-          expect(res.body.errors.email).to.be.an('object');
-          expect(res.body.errors.email).to.include.keys(
-            'message', 'name', 'properties', 'kind', 'path', '$isValidatorError'
-          );
+          expect(res.body.message).to.equal('Some required fields are missing');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data).to.include.members([ 'lastName' ]);
           done();
         });
     });
@@ -100,18 +81,13 @@ describe('User service', function () {
         .set('Accept', 'application/json')
         .send(_.omit(userObj, 'email'))
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(400);
-          expect(res.body).to.have.property('name');
-          expect(res.body.name).to.equal('ValidationError');
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.include('user validation failed');
-          expect(res.body).to.have.property('errors');
-          expect(res.body.errors).to.be.an('object');
-          expect(res.body.errors).to.have.all.keys('email');
-          expect(res.body.errors.email).to.be.an('object');
-          expect(res.body.errors.email).to.include.keys(
-            'message', 'name', 'properties', 'kind', 'path', '$isValidatorError'
-          );
+          expect(res.body.message).to.equal('Some required fields are missing');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data).to.include.members([ 'email' ]);
           done();
         });
     });
@@ -122,18 +98,13 @@ describe('User service', function () {
         .set('Accept', 'application/json')
         .send(_.omit(userObj, 'password'))
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(400);
-          expect(res.body).to.have.property('name');
-          expect(res.body.name).to.equal('ValidationError');
           expect(res.body).to.have.property('message');
-          expect(res.body.message).to.include('user validation failed');
-          expect(res.body).to.have.property('errors');
-          expect(res.body.errors).to.be.an('object');
-          expect(res.body.errors).to.have.all.keys('password');
-          expect(res.body.errors.password).to.be.an('object');
-          expect(res.body.errors.password).to.include.keys(
-            'message', 'name', 'properties', 'kind', 'path'
-          );
+          expect(res.body.message).to.equal('Some required fields are missing');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data).to.include.members([ 'password' ]);
           done();
         });
     });
@@ -144,11 +115,13 @@ describe('User service', function () {
         .set('Accept', 'application/json')
         .send(userObj)
         .end((err, res) => {
-            console.log(res.body);
-          expect(res).to.have.status(201);
-          expect(res.body).to.have.property('email');
-          expect(res.body.email).to.equal('dummy@user.com');
-          id = res.body._id;
+          expect(err).to.be.a('null');
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('User created successfully');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.have.property('_id');
+          id = res.body.data._id;
           done();
         });
     });
@@ -177,10 +150,10 @@ describe('User service', function () {
         .get(`/api/user/${id}`)
         .set('Accept', 'application/json')
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(401);
-          expect(res.body).to.have.property('response');
-          expect(res.body.response).to.have.property('message');
-          expect(res.body.response.message).to.equal('No Authorization header was found');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('No Authorization header was found');
           done();
         });
     });
@@ -191,6 +164,7 @@ describe('User service', function () {
         .send(userObj)
         .set('Accept', 'application/json')
         .end((err, res) => {
+          expect(err).to.be.a('null');
           token = res.body.token;
           id = res.body.user._id;
           expect(res).to.have.status(200);
@@ -202,14 +176,18 @@ describe('User service', function () {
   });
 
   describe('#Read', () => {
-    it('should return 200, Users retrieved successfully', (done) => {
+    it('should return 200, User retrieved successfully', (done) => {
       chai.request(app)
         .get(`/api/user/${id}`)
         .set('Authorization', 'Bearer '.concat(token))
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(200);
-          expect(res.body).to.have.property('_id');
-          expect(res.body._id).to.be.a('string');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('User retrieved successfully');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.have.property('_id');
+          expect(res.body.data._id).to.be.a('string');
           done();
         });
     });
@@ -234,8 +212,12 @@ describe('User service', function () {
         .send(userObj)
         .set('Authorization', 'Bearer '.concat(token))
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(200);
-          expect(res.body).to.include.keys('_id', 'email');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('User updated successfully');
+          expect(res.body).to.have.property('data');
+          expect(res.body.data).to.include.keys('_id', 'email');
           done();
         });
     });
@@ -247,6 +229,7 @@ describe('User service', function () {
         .delete('/api/user/58a58b41ccd50a3f0ec99ee2')
         .set('Authorization', 'Bearer '.concat(token))
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(404);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('User not found');
@@ -259,9 +242,11 @@ describe('User service', function () {
         .delete(`/api/user/${id}`)
         .set('Authorization', 'Bearer '.concat(token))
         .end((err, res) => {
+          expect(err).to.be.a('null');
           expect(res).to.have.status(200);
-          expect(res.body).to.include.keys('email', 'isDeleted');
-          expect(res.body.isDeleted).to.equal(true);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('User deleted successfully');
+          expect(res.body.data).to.include.keys('email', 'isDeleted');
           done();
         });
     });

@@ -1,2 +1,2 @@
-module.exports = exports = function picturePlugin(schema, options) {
+module.exports = exports = function eventPlugin(schema, options) {
 };

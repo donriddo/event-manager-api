@@ -1,5 +1,5 @@
 const UserRoutes = require('./user');
-const PictureRoutes = require('./event');
+const EventRoutes = require('./event');
 const Auth = require('./authentication');
 const express = require('express');
 
@@ -11,7 +11,7 @@ router.get('/health-check', (req, res) => res.send('OK'));
 
 router.use('/user', UserRoutes);
 
-router.use('/event', PictureRoutes);
+router.use('/event', EventRoutes);
 
 router.use('/login', Auth);
 
